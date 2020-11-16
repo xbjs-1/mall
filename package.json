@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "better-scroll": "^1.13.2",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.4.9"
@@ -34,7 +35,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-mixed-spaces-and-tabs": 0
+    }
   },
   "browserslist": [
     "> 1%",
