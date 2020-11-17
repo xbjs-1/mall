@@ -70,11 +70,27 @@ export default {
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
+
+
+  },
+  mounted() {
+    this.$bus.$on('itemLoad', () => {
+      this.debounce(this.$refs.scroll.refresh, 1000)
+    })
   },
   methods: {
     /*
     * 事件监听的方法
     * */
+    debounce(func, delay) {
+      let timer = null
+      return function (...args) {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+          func.apply(this, args)
+        }, delay)
+      }
+    },
     tabClick(index) {
       switch (index) {
         case 0:
@@ -92,7 +108,6 @@ export default {
       this.$refs.scroll.scrollTo(0, 0)
     },
     contentScroll(position) {
-      // console.log(position);
       this.showBack = -position.y > 1000;
     },
     loadMore() {
