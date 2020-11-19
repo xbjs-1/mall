@@ -29,22 +29,25 @@
     mounted() {
       //  1.创建BScroll对象
       this.scroll = new BScroll(this.$refs.wrapper, {
-        pullUpLoad: true,
+        pullUpLoad: this.pullUpLoad,
         probeType: this.probeType,
         click: true
       })
 
       //  2.监听滚动的位置
-      this.scroll.on('scroll', (position) => {
-        // console.log('hello');
-        this.$emit('scroll', position)
-      })
+      if (this.probeType === 2 || this.probeType === 3) {
+        this.scroll.on('scroll', (position) => {
+          // console.log('hello');
+          this.$emit('scroll', position)
+        })
+      }
 
       //  3.监听上拉事件
-      this.scroll.on('pullingUp', () => {
-        // console.log('hello');
-        this.$emit('pullingUp')
-      })
+      if (this.pullUpLoad) {
+        this.scroll.on('pullingUp', () => {
+          this.$emit('pullingUp')
+        })
+      }
 
     },
     methods: {
@@ -52,11 +55,13 @@
         this.scroll && this.scroll.scrollTo(x, y, time)
       },
       finishPullUp() {
-        this.finishPullUp()
+        this.scroll && this.scroll.finishPullUp()
       },
       refresh() {
-        console.log('a');
         this.scroll && this.scroll.refresh();
+      },
+      getScrollY() {
+        return this.scroll ? this.scroll.y : 0
       }
     }
   }
