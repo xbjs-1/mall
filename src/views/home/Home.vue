@@ -64,7 +64,8 @@ export default {
       showBack: false,
       tabOffsetTop: 0,
       isTabFixed: false,
-      saveY: 0
+      saveY: 0,
+      homeItemListener: null
     }
   },
   computed: {
@@ -83,6 +84,7 @@ export default {
   },
   mounted() {
     const refresh = debounce(this.$refs.scroll.refresh, 500)
+    this.homeItemListener =
     this.$bus.$on('itemLoad', () => {
       refresh()
     })
@@ -92,7 +94,11 @@ export default {
     this.$refs.scroll.scrollTo(0, this.saveY, 0);
   },
   deactivated() {
+    //  保存y值
     this.saveY = this.$refs.scroll.getScrollY();
+
+    //  取消全局监听事件
+
   },
   methods: {
     /*
