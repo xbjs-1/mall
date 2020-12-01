@@ -32,6 +32,7 @@ export default {
   },
   methods: {
     itemClick() {
+      console.log('hello');
       this.$router.push(this.path)
     }
   }

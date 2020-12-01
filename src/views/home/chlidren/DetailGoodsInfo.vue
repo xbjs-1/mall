@@ -33,7 +33,7 @@
     },
     methods: {
       imgLoad() {
-
+        this.$emit('detailImageLoad')
       }
     },
   }

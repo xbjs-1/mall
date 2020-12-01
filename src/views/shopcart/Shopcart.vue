@@ -1,11 +1,18 @@
 <template>
-  <h2>购物车</h2>
+  <div class="cart">
+    <nav-bar>购物车</nav-bar>
+  </div>
 </template>
 
 <script>
-export default {
-  name: "Shopcart"
-}
+  import NavBar from "@/components/common/navbar/NavBar";
+
+  export default {
+    name: "Shopcart",
+    components: {
+      NavBar
+    }
+  }
 </script>
 
 <style scoped>
