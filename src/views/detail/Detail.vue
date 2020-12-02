@@ -37,10 +37,12 @@
 
   import Scroll from "@/components/common/scroll/Scroll";
   import GoodsList from "@/components/content/goods/GoodsList";
+  // import Toast from "@/components/common/toast/Toast";
 
   import {getDetail, Goods, getRecommend} from "@/network/detail";
   import {itemListenerMixin, backTopMixin} from "@/common/utils/mixin";
   import {debounce} from "@/common/utils/utils";
+  import {mapActions} from 'vuex'
 
   export default {
     name: "Detail",
@@ -54,7 +56,7 @@
       DetailCommentInfo,
       DetailBottomBar,
       Scroll,
-      GoodsList
+      GoodsList,
     },
     mixins: [itemListenerMixin, backTopMixin],
     data() {
@@ -70,6 +72,8 @@
         themeTops: [],
         getThemeTop: null,
         currentIndex: 0,
+        message: '',
+        show: false
       }
     },
     created() {
@@ -132,6 +136,9 @@
 
     },
     methods: {
+      ...mapActions({
+        add:'addCart'
+      }),
       detailImageLoad() {
         this.newRefresh()
         this.getThemeTop()
@@ -166,7 +173,15 @@
         product.iid = this.iid
 
         //  添加到购物车
-        this.$store.dispatch('addCart', product)
+        // this.$store.dispatch('addCart', product).then(res => {
+        //   console.log(res)
+        // })
+        this.add(product).then(res => {
+          this.$toast.showMessage(res)
+        })
+
+
+
       }
     }
 
@@ -189,4 +204,6 @@
     left: 0;
     right: 0;
   }
+
+
 </style>
