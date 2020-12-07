@@ -19,7 +19,6 @@
 </template>
 
 <script>
-  // import {debounce} from "@/common/utils/utils";
 
   export default {
     name: "DetailGoodsInfo",
