@@ -144,6 +144,7 @@ export default {
       getHomeMultidata().then(res => {
         this.banners = res.data.banner.list;
         this.recommends = res.data.recommend.list;
+        console.log(res);
       })
     },
     getHomeGoods(type) {
